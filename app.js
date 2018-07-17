@@ -27,7 +27,7 @@ var addItemListener = function(event){
 	addItemSubmit();
 }
 var addItemButtonListener = function(){
-	$('.js-shopping-list-form').submit(addItemListener);
+	$('#js-shopping-list-form').submit(addItemListener);
 }
 
 var addItemReturnListener = function(){
@@ -42,8 +42,25 @@ var addAddItemListeners = function(){
 	addItemReturnListener();
 }
 
+var deleteItem = function(item){
+	var index = state.items.indexOf(item);
+	if(index !== -1){
+		state.items.splice(index, 1);
+	}
+}
+
+var deleteItemListener = function(){
+	$('.shopping-list').on('click', '.shopping-item-delete', function(event){
+		var item = $(this).closest('li');
+		var itemName = item.find('.shopping-item').text();
+		deleteItem(itemName);
+	});
+}
+
+
 var addAllListeners = function(){
 	addAddItemListeners();
+	deleteItemListener();
 }
 	
 
