@@ -49,18 +49,26 @@ var deleteItem = function(item){
 	}
 }
 
-var deleteItemListener = function(){
+var addDeleteItemListener = function(){
 	$('.shopping-list').on('click', '.shopping-item-delete', function(event){
 		var item = $(this).closest('li');
 		var itemName = item.find('.shopping-item').text();
 		deleteItem(itemName);
+		item.remove();
 	});
 }
 
+var addCheckItemListener = function(){
+	$('.shopping-list').on('click', '.shopping-item-toggle', function(event){
+		var item = $(this).closest('li');
+		item.find('.shopping-item').toggleClass('shopping-item__checked');
+	});
+}
 
 var addAllListeners = function(){
 	addAddItemListeners();
-	deleteItemListener();
+	addDeleteItemListener();
+	addCheckItemListener();
 }
 	
 
